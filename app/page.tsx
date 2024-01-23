@@ -1,7 +1,7 @@
 "use client";
 
 import AddFab from "@/components/add-fab";
-import { Button, IconButton } from "@material-tailwind/react";
+import { ServerForm } from "@/components/server-form";
 
 export default function Home() {
   const handleAddClick = () => {
@@ -10,7 +10,7 @@ export default function Home() {
 
   return (
     <div className="mx-auto flex w-full max-w-screen-lg flex-col items-center justify-center gap-3 p-12 lg:p-0">
-      
+      <ServerForm />
 
       <AddFab onClick={handleAddClick}></AddFab>
     </div>
