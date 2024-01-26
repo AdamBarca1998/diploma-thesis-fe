@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { Providers } from "@/components/providers";
+import { Providers, useServersContext } from "@/components/providers";
 import { AppNavBar } from "@/components/app-nav-bar";
 import { AppMenu } from "@/components/app-menu";
+import { useEffect } from "react";
+import { readServersConfig } from "./api/servers-config/route";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,18 +23,20 @@ export default function RootLayout({
   return (
     <html lang="en">
         <body className={`${inter.className}`}>
+          <Providers>
           <div className="flex flex-col h-screen">
             <AppNavBar></AppNavBar>
 
-            <div className="flex h-full">
-                <div className="flex-none">
-                  <AppMenu></AppMenu>
-                </div>
-                <div className="flex-auto">
-                  {children}
-                </div>
+            <div className="flex overflow-y-scroll">
+              <div className="flex-none overflow-y-scroll">
+                <AppMenu></AppMenu>
               </div>
+              <div className="flex-auto">
+                {children}
+              </div>
+            </div>
           </div>
+          </Providers>
         </body>
     </html>
   );
