@@ -18,6 +18,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   
+  const navbarHeight = 16 * 4;
+
   return (
     <html lang="en">
         <body className={`${inter.className}`}>
@@ -25,8 +27,8 @@ export default function RootLayout({
           <div className="flex flex-col h-screen">
             <AppNavBar></AppNavBar>
 
-            <div className="flex overflow-y-scroll">
-              <div className="flex-none overflow-y-scroll">
+            <div className="flex" style={{ height: `calc(100vh - ${navbarHeight}px)` }}>
+              <div className="flex-none overflow-y-scroll bg-white bg-opacity-75">
                 <AppMenu></AppMenu>
               </div>
               <div className="flex-auto">

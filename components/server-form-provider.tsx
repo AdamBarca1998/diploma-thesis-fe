@@ -20,7 +20,7 @@ export const ServerFormProvider: FC<PropsWithChildren<{onClose: () => void}>> = 
 		setSubmitting(true);
 
 		try {
-			let apiUrl = '/api/servers';
+			let apiUrl = '/api/servers-config';
 			let method = 'POST';
 
 			const response = await fetch(apiUrl, {

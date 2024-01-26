@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 @import '@fortawesome/fontawesome-free/css/all.css';
-@import 'react-resizable/css/styles.css';
 
 :root {
   --foreground-rgb: 0, 0, 0;

@@ -24,11 +24,9 @@ export function AppMenu() {
     }, []);
   
     return (
-        <div className="resize-x">
-            <ul className="menu bg-white bg-opacity-75">
-                {servers.map((e) => ServerItem(e))}
-            </ul>
-        </div>
+        <ul className="menu w-96">
+            {servers.map((e) => ServerItem(e))}
+        </ul>
     );
   }
   
