@@ -15,7 +15,6 @@ export const ServerForm = async () => {
     );
 };
 
-const Inputs = () => {
     const methods = useFormContext<ServerEntityForm>();
 
     return (
