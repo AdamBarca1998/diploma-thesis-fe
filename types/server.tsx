@@ -8,7 +8,7 @@ export const serverStateSchema = z.enum([
 
 export type ServerState = z.infer<typeof serverStateSchema>;
 
-// server schema for servers-config.json
+// server schema for server-configs.json
 
 export const serverConfigFormSchema = z.object({
 	name: z.string().min(1, "Name is required"),

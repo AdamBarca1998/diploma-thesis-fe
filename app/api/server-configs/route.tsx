@@ -1,23 +1,25 @@
 import { ServerConfig, serverConfigFormSchema, serverSchema } from '@/types/server';
 import { promises as fs } from 'fs';
+import { revalidateTag } from 'next/cache';
 import { z } from 'zod';
 
-const FILE_PATH = `${process.cwd()}/servers-config.json`;
+const FILE_PATH = `${process.cwd()}/server-configs.json`;
 const VALIDATION_SCHEMA = serverConfigFormSchema;
 
 export const POST = async (req: Request) => {
 	const bodyJson = await req.json();
 
 	try {
-		const newServer = VALIDATION_SCHEMA.parse(bodyJson);
+		const newConfig = VALIDATION_SCHEMA.parse(bodyJson);
 
-		const servers = await readServersConfig();
-		await writeServersConfig([...servers, newServer]);
+		const configs = await readServersConfig();
+		await writeServersConfig([...configs, newConfig]);
 
 		const responseBody = {
-			server: newServer
+			server: newConfig
 		};
 
+		revalidateTag('server-configs');
 		return new Response(JSON.stringify(responseBody), {
 			status: 201,
 			headers: { 'Content-Type': 'application/json' }
@@ -36,7 +38,7 @@ export const GET = async (_: Request) => {
 		});
 	} catch (error) {
 		console.log(error);
-		return new Response('Something went wrong GET /servers-config', { status: 500 });
+		return new Response('Something went wrong GET /server-configs', { status: 500 });
 	}
 };
 

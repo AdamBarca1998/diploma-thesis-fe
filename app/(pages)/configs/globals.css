@@ -32,3 +32,7 @@ body {
     text-wrap: balance;
   }
 }
+
+.over-ellipsis {
+  @apply overflow-hidden whitespace-nowrap overflow-ellipsis;
+}

@@ -5,8 +5,9 @@ import { FormProvider, type SubmitHandler, useForm } from 'react-hook-form';
 import { FC, PropsWithChildren, useState } from "react";
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from "@material-tailwind/react";
+import { useRouter } from "next/navigation";
 
-export const ServerFormProvider: FC<PropsWithChildren<{onClose: () => void}>> = ({
+export const ServerConfigsFormProvider: FC<PropsWithChildren<{onClose: () => void}>> = ({
 	children,
 	onClose
 }) => {
@@ -15,12 +16,13 @@ export const ServerFormProvider: FC<PropsWithChildren<{onClose: () => void}>> = 
 		resolver: zodResolver(serverConfigFormSchema)
 	});
 	const [submitting, setSubmitting] = useState(false);
+	const router = useRouter();
 
 	const handleSubmit: SubmitHandler<ServerConfig> = async data => {
 		setSubmitting(true);
 
 		try {
-			let apiUrl = '/api/servers-config';
+			let apiUrl = '/api/server-configs';
 			let method = 'POST';
 
 			const response = await fetch(apiUrl, {
@@ -32,8 +34,8 @@ export const ServerFormProvider: FC<PropsWithChildren<{onClose: () => void}>> = 
 			});
 
 			if (response.ok) {
-				console.log('OK');
 				onClose();
+				router.refresh();
 			} else {
 				console.error('Failed to create new server!');
 			}

@@ -1,11 +1,13 @@
+"use client";
+
 import { Card, CardBody, Typography, Dialog } from "@material-tailwind/react";
-import React from "react";
+import React, { useState } from "react";
 import AddFab from "./add-fab";
-import { ServerForm } from "./server-form";
+import { ServerConfigForm } from "./form/server-config-form";
 
 export function ServerDialog() {
 
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
     const handleOpen = () => {
         setOpen((cur) => !cur);
     };
@@ -26,7 +28,7 @@ export function ServerDialog() {
                         Create Server
                     </Typography>
                     
-                    <ServerForm onClose={handleOpen}></ServerForm>
+                    <ServerConfigForm onClose={handleOpen}></ServerConfigForm>
                 </CardBody>
             </Card>
         </Dialog>
