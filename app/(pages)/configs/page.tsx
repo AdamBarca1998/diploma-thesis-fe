@@ -15,7 +15,7 @@ export default async function Home() {
       <div className="flex flex-wrap gap-4">
         {configs.map((config) => (
             <Suspense key={config.url + config.name + "Home"} fallback={
-                <LoadingItem config={config}></LoadingItem>
+                <Item config={config} icon="fa-solid fa-spinner fa-spin"></Item>
             }>
                 <ConfigItem config={config} key={config.name + config.url + 'configItem'} />
             </Suspense>
@@ -35,57 +35,35 @@ async function ConfigItem({ config }: { config: ServerConfig }) {
   if (server && server.state !== 'Error') {
     return (
         <Link href={itemUrl}>
-            <div className="my-8">
-                <div className="card w-64 bg-base-100 shadow-xl">
-                <div className="card-body">
-                    <h2 className="card-title">
-                    <p className="over-ellipsis">{config.name}</p>
-                    </h2>
-
-                    <p className="text-gray-500 over-ellipsis">{config.url}</p>
-
-                    <i className="fa-solid fa-circle-check"></i>
-                </div>
-                </div>
-            </div>
+            <Item config={config} icon="fa-solid fa-circle-check"></Item>
         </Link>
     );
   } else {
     return (
-      <div className="my-8">
-        <div className="card w-64 bg-base-100 shadow-xl">
-          <div className="card-body">
-            <h2 className="card-title">
-              <p className="over-ellipsis">{config.name}</p>
-            </h2>
-
-            <p className="text-gray-500 over-ellipsis">{config.url}</p>
-
-            <i className="fa-solid fa-triangle-exclamation"></i>
-          </div>
-        </div>
-      </div>
+      <Item config={config} icon="fa-solid fa-triangle-exclamation"></Item>
     );
   }
 }
 
-async function LoadingItem({ config }: { config: ServerConfig }) {
+async function Item({ config, icon }: { config: ServerConfig, icon: String }) {
 
-    return (
-        <div className="my-8">
-            <div className="card w-64 bg-base-100 shadow-xl">
-                <div className="card-body">
-                    <h2 className="card-title">
-                        <p className="over-ellipsis">{config.name}</p>
-                    </h2>
+  return (
+      <div className="my-8">
+        <div className="indicator">
+          <div className="card w-64 bg-base-100 shadow-xl">
+              <div className="card-body">
+                  <h2 className="card-title">
+                      <p className="over-ellipsis">{config.name}</p>
+                  </h2>
 
-                    <p className="text-gray-500 over-ellipsis">{config.url}</p>
+                  <p className="text-gray-500 over-ellipsis">{config.url}</p>
+              </div>
+          </div>
 
-                    <div className="card-actions">
-                        <i className="fa-solid fa-spinner fa-spin"></i>
-                    </div>
-                </div>
-            </div>
+          <span className="indicator-item badge">
+            <i className={`${icon}`}></i>
+          </span> 
         </div>
-    );
+      </div>
+  );
 }

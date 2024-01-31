@@ -62,19 +62,22 @@ function ResourceItem(resource: Resource, url: String) {
                 <details>
                     {Summary(resource.name !== "" ? resource.name : resource.type, "fa-brands fa-sourcetree", itemUrl)}
 
-                    {resource.functions.map((e) => FunctionItem(e))}
+                    {resource.functions.map((e) => FunctionItem(e, itemUrl))}
                 </details>
             </li>
         </ul>
     );
 }
 
-function FunctionItem(func: Function) {
+function FunctionItem(func: Function, url: String) {
+
+    const itemUrl = `${url}#${func.name}`;
+
     return (
         <ul>
             <li key={func.name + func.returnType + "FunctionItem"}>
                 <details>
-                    {Summary(func.name, "fa-solid fa-code")}
+                    {Summary(func.name, "fa-solid fa-code", itemUrl)}
 
                     {func.properties.map((e) => PropertyItem(e))}
                 </details>

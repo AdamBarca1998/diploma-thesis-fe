@@ -75,3 +75,28 @@ export async function fetchResourcesByConfigName(configName: String) {
         return fetchResources(config);
     }
 }
+
+export async function fetchResourceByConfigAndType(config: ServerConfig, type: String) {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), TIMEOUT_DURATION);
+
+    return fetch(`${config.url}/${type}`, {
+        signal: controller.signal,
+        next: { tags: ['all'] }
+    })
+        .then((response) => {
+            clearTimeout(timeoutId);
+
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error(`Server responded with status ${response.status}`);
+            }
+        })
+        .then((json) => {
+            return resourceSchema.parse(json);
+        })
+        .catch((error) => {
+            // console.error(`Error fetching resources ${serverConfig.name} ${serverConfig.url}:`, error);
+        });
+}

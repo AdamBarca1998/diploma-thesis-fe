@@ -19,31 +19,34 @@ const ResourcesPage = async ({
 
             <div className="flex flex-wrap gap-4">
                 {server?.resources.map((resource) => (
-                    <ResourceItem resource={resource} key={resource.name + resource.type + 'resourceItem'} />
+                    <ResourceItem 
+                        resource={resource} 
+                        itemUrl={`/configs/${server.config.name}/${resource.name}`} 
+                        key={resource.name + resource.type + 'resourceItem'
+                    }/>
                 ))}
             </div>
         </>
 	);
 };
 
-async function ResourceItem({ resource }: { resource: Resource }) {
-
-    const itemUrl = `/configs/${resource.name}`;
+async function ResourceItem({ resource, itemUrl }: { resource: Resource, itemUrl: String }) {
   
     return (
-      <Link href={`${itemUrl}`}>
-        <div className="my-8">
-          <div className="card w-64 bg-base-100 shadow-xl">
-            <div className="card-body">
-              <h2 className="card-title">
-                <p className="over-ellipsis">{resource.name}</p>
-              </h2>
-              <p className="text-gray-500 over-ellipsis">{resource.type}</p>
+        <Link href={`${itemUrl}`}>
+            <div className="my-8">
+                <div className="card w-64 bg-base-100 shadow-xl">
+                    <div className="card-body">
+                        <h2 className="card-title">
+                            <p className="over-ellipsis">{resource.name}</p>
+                        </h2>
+                        
+                        <p className="text-gray-500 over-ellipsis">{resource.type}</p>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-      </Link>
+        </Link>
     );
-  }
+}
 
 export default ResourcesPage;
