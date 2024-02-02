@@ -7,6 +7,7 @@ import { FieldError } from './field-error';
 import { Input } from '@material-tailwind/react';
 
 export const ServerNameField = () => {
+    
 	const methods = useFormContext<ServerConfig>();
 
 	return (

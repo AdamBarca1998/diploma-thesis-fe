@@ -48,7 +48,7 @@ async function ConfigItem({ config }: { config: ServerConfig }) {
 async function Item({ config, icon }: { config: ServerConfig, icon: String }) {
 
   return (
-      <div className="my-8">
+      <div className="mt-8">
         <div className="indicator">
           <div className="card w-64 bg-base-100 shadow-xl">
               <div className="card-body">

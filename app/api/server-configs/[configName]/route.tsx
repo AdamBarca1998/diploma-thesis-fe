@@ -9,7 +9,7 @@ export const GET = async (
 
 		return new Response(JSON.stringify(configs.find(e => e.name === params.configName)), { status: 200 });
 	} catch (error) {
-		console.log(error);
+		console.error(error);
 
 		return new Response('Something went wrong', { status: 500 });
 	}

@@ -27,9 +27,12 @@ export const fetchServerConfigByName = async (name: String) => {
             const json = await response.json();
 
 			return serverConfigFormSchema.parse(json);
+        } else {
+            throw new Error(`Server responded with status ${response.status}`);
         }
     } catch (error) {
         console.error(`Error fetching data from AppServers:`, error);
+        throw new Error(`Error: ${error}`);
     }
 };
 
@@ -98,5 +101,6 @@ export async function fetchResourceByConfigAndType(config: ServerConfig, type: S
         })
         .catch((error) => {
             // console.error(`Error fetching resources ${serverConfig.name} ${serverConfig.url}:`, error);
+            // throw new Error(`Error: ${error}`);
         });
 }

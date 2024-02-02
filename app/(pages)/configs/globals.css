@@ -34,5 +34,5 @@ body {
 }
 
 .over-ellipsis {
-  @apply overflow-hidden whitespace-nowrap overflow-ellipsis;
+  @apply overflow-hidden whitespace-nowrap overflow-ellipsis max-w-max;
 }

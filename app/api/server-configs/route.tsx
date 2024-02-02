@@ -25,7 +25,7 @@ export const POST = async (req: Request) => {
 			headers: { 'Content-Type': 'application/json' }
 		});
 	} catch (error) {
-		console.log(error);
+		console.error(error);
 		return new Response('Something went wrong', { status: 500 });
 	}
 };
@@ -37,7 +37,7 @@ export const GET = async (_: Request) => {
 			headers: { 'Content-Type': 'application/json' }
 		});
 	} catch (error) {
-		console.log(error);
+		console.error(error);
 		return new Response('Something went wrong GET /server-configs', { status: 500 });
 	}
 };

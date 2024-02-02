@@ -9,4 +9,4 @@ export const functionSchema = z.object({
     validations: z.string().array(),
 });
 
-export type Function = z.infer<typeof functionSchema>;
+export type Func = z.infer<typeof functionSchema>;

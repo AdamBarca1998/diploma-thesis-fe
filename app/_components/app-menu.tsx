@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
 import { ServerConfig, serverStateSchema } from "@/types/server";
 import { Resource } from "@/types/resource";
-import { Function } from "@/types/function";
+import { Func } from "@/types/function";
 import { Property } from "@/types/property";
 import { fetchResources, fetchServerConfigs } from "@/api-utils/servers";
 import Link from "next/link";
@@ -60,7 +60,7 @@ function ResourceItem(resource: Resource, url: String) {
         <ul>
             <li key={resource.name + resource.type + "ResourceItem"}>
                 <details>
-                    {Summary(resource.name !== "" ? resource.name : resource.type, "fa-brands fa-sourcetree", itemUrl)}
+                    {Summary(resource.name !== "" ? resource.name : resource.type, resource.icon != "" ? resource.icon : "fa-brands fa-sourcetree", itemUrl)}
 
                     {resource.functions.map((e) => FunctionItem(e, itemUrl))}
                 </details>
@@ -69,13 +69,13 @@ function ResourceItem(resource: Resource, url: String) {
     );
 }
 
-function FunctionItem(func: Function, url: String) {
+function FunctionItem(func: Func, url: String) {
 
     const itemUrl = `${url}#${func.name}`;
 
     return (
         <ul>
-            <li key={func.name + func.returnType + "FunctionItem"}>
+            <li key={url + func.name + func.returnType + "AppMenuFunctionItem"}>
                 <details>
                     {Summary(func.name, "fa-solid fa-code", itemUrl)}
 
