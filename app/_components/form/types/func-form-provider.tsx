@@ -35,7 +35,7 @@ export const FuncFormProvider: FC<PropsWithChildren<{zodRules: ZodRule[], url: s
 			});
 
 			if (response.ok) {
-				console.log("OK");
+				console.log(await response.json());
 			} else {
 				console.error('KO');
 			}

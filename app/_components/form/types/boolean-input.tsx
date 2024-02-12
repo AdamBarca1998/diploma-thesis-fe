@@ -4,9 +4,9 @@ import { Property } from "@/types/property";
 import { ErrorMessage } from "@hookform/error-message";
 import { useFormContext } from "react-hook-form";
 import { FieldError } from "../field-error";
-import { ZodSchema, z } from "zod";
-import { useState } from "react";
 import { ZodRule } from "./func-form";
+import { z } from "zod";
+import { useEffect, useState } from "react";
 
 export const BooleanInput = ({ 
     property,
@@ -16,14 +16,22 @@ export const BooleanInput = ({
     onAddRule: (rule: ZodRule) => void
 }) => {
 
-    onAddRule({ name: property.name, fieldType: z.boolean() });
-
     const methods = useFormContext();
+    const [isRuleAdded, setHasRuleAdded] = useState(false);
+
+    useEffect(() => {
+        if (!isRuleAdded) {
+            onAddRule({ name: property.name, fieldType: z.boolean() });
+
+            setHasRuleAdded(true);
+        }
+    }, [property.name, isRuleAdded, onAddRule]);
+
 
     return (
         <>
             <div className="form-control">
-                <label className="label cursor-pointer">
+                <label className="label cursor-pointer pl-0">
                     <span className="font-bold">{property.name}</span> 
                     <input 
                         type="checkbox" 
@@ -32,13 +40,13 @@ export const BooleanInput = ({
                         {...methods.register(property.name)}
                     />
                 </label>
-            </div>
 
-            <ErrorMessage
-                errors={methods.formState.errors}
-                name={`${property.name}`}
-                render={FieldError}
-            />
+                <ErrorMessage
+                    errors={methods.formState.errors}
+                    name={`${property.name}`}
+                    render={FieldError}
+                />
+            </div>
         </>
     );
 };
