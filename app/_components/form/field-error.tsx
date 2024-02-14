@@ -7,7 +7,7 @@ export const FieldError = (
 }) => {
 
     return (
-        <div>
+        <div className="mt-4">
             <p className="text-red-600">{data.message}</p>
 
             {

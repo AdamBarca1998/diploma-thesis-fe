@@ -5,6 +5,8 @@ import { FC, PropsWithChildren, useState } from "react";
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ZodRule } from "./func-form";
 import { z } from 'zod';
+import toast from 'react-hot-toast';
+import JSONbig from 'json-bigint';
 
 export const FuncFormProvider: FC<PropsWithChildren<{zodRules: ZodRule[], url: string}>> = ({
 	children,
@@ -31,15 +33,18 @@ export const FuncFormProvider: FC<PropsWithChildren<{zodRules: ZodRule[], url: s
 				headers: {
 					'Content-Type': 'application/json'
 				},
-				body: JSON.stringify(data)
+				body: JSONbig.stringify(data)
 			});
 
+			const json = await response.json();
+
 			if (response.ok) {
-				console.log(await response.json());
+				toast.success(`${json}`);
 			} else {
-				console.error('KO');
+				toast.error(`${json}`);
 			}
 		} catch (error) {
+			toast.error(`${error}`);
 			console.error('Error:', error);
 		} finally {
 			setSubmitting(false);

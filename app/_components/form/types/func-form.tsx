@@ -7,6 +7,10 @@ import { NotFoundInput } from "./not-found-input";
 import { FuncFormProvider } from "./func-form-provider";
 import { FC, useState } from "react";
 import { ZodSchema } from "zod";
+import { ByteInput } from "./byte-input";
+import { ShortInput } from "./short-input";
+import { IntInput } from "./int-input";
+import { LongInput } from "./long-input";
 
 interface InputComponentMap {
     [key: string]: FC<{ 
@@ -17,7 +21,15 @@ interface InputComponentMap {
 
 const inputComponentMap: InputComponentMap = {
     boolean: BooleanInput,
-    "java.lang.Boolean": BooleanInput
+    "java.lang.Boolean": BooleanInput,
+    byte: ByteInput,
+    "java.lang.Byte": ByteInput,
+    short: ShortInput,
+    "java.lang.Short": ShortInput,
+    int: IntInput,
+    "java.lang.Integer": IntInput,
+    long: LongInput,
+    "java.lang.Long": LongInput
 };
 
 export type ZodRule = { name: string; fieldType: ZodSchema };
@@ -34,9 +46,9 @@ export const FuncForm = ({ func, url }: { func: Func, url: string }) => {
         const FieldComponent = inputComponentMap[property.type] || NotFoundInput;
 
         return (
-        <div key={property.name + property.type + index} className="mt-4">
-            <FieldComponent property={property} onAddRule={handleAddRule} />
-        </div>
+            <div key={property.name + property.type + index} className="mt-4">
+                <FieldComponent property={property} onAddRule={handleAddRule} />
+            </div>
         );
     });
 

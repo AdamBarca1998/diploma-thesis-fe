@@ -6,6 +6,7 @@ import { AppNavBar } from "@/app/_components/app-nav-bar";
 import { AppMenu } from "@/app/_components/app-menu";
 import Loading from "./loading";
 import { Suspense } from "react";
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,24 +27,26 @@ export default function RootLayout({
     <html lang="en">
         <body className={`${inter.className}`}>
           <Providers>
-          <div className="flex flex-col h-screen">
-            <AppNavBar></AppNavBar>
+            <div className="flex flex-col h-screen">
+              <AppNavBar></AppNavBar>
 
-            <div className="flex" style={{ height: `calc(100vh - ${navbarHeight}px)` }}>
-              <div className="flex-none overflow-y-auto bg-white bg-opacity-75 w-96">
-                <Suspense fallback={<Loading></Loading>}>
-                  <AppMenu></AppMenu>
-                </Suspense>
-              </div>
-              <div className="flex-auto overflow-y-auto">
-                <Suspense fallback={<Loading></Loading>}>
-                  <div className="m-8">
-                    {children}
-                  </div>
-                </Suspense>
+              <Toaster position="bottom-center" />
+
+              <div className="flex" style={{ height: `calc(100vh - ${navbarHeight}px)` }}>
+                <div className="flex-none overflow-y-auto bg-white bg-opacity-75 w-96">
+                  <Suspense fallback={<Loading></Loading>}>
+                    <AppMenu></AppMenu>
+                  </Suspense>
+                </div>
+                <div className="flex-auto overflow-y-auto">
+                  <Suspense fallback={<Loading></Loading>}>
+                    <div className="m-8">
+                      {children}
+                    </div>
+                  </Suspense>
+                </div>
               </div>
             </div>
-          </div>
           </Providers>
         </body>
     </html>
