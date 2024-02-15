@@ -1,6 +1,6 @@
 import { Property } from "@/types/property";
 import { ZodRule } from "./func-form";
-import { NumberInput } from "./number-input";
+import { IntegerInput } from "./integer-input";
 
 export const LongInput = ({ 
     property,
@@ -10,5 +10,5 @@ export const LongInput = ({
     onAddRule: (rule: ZodRule) => void,
 }) => {
 
-    return NumberInput({property: property, onAddRule: onAddRule, min: BigInt("-9223372036854775808"), max: BigInt("9223372036854775807")});
+    return IntegerInput({property: property, onAddRule: onAddRule, min: BigInt("-9223372036854775808"), max: BigInt("9223372036854775807")});
 };

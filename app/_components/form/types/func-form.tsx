@@ -11,6 +11,8 @@ import { ByteInput } from "./byte-input";
 import { ShortInput } from "./short-input";
 import { IntInput } from "./int-input";
 import { LongInput } from "./long-input";
+import { FloatInput } from "./float-input";
+import { CharInput } from "./char-input";
 
 interface InputComponentMap {
     [key: string]: FC<{ 
@@ -29,7 +31,13 @@ const inputComponentMap: InputComponentMap = {
     int: IntInput,
     "java.lang.Integer": IntInput,
     long: LongInput,
-    "java.lang.Long": LongInput
+    "java.lang.Long": LongInput,
+    float: FloatInput,
+    "java.lang.Float": FloatInput,
+    double: FloatInput,
+    "java.lang.Double": FloatInput,
+    char: CharInput,
+    "java.lang.Character": CharInput
 };
 
 export type ZodRule = { name: string; fieldType: ZodSchema };

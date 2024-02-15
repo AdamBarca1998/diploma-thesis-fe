@@ -21,34 +21,34 @@ export const FuncFormProvider: FC<PropsWithChildren<{zodRules: ZodRule[], url: s
 	const [submitting, setSubmitting] = useState(false);
 
 	const handleSubmit: SubmitHandler<any> = async data => {
-		console.log(data);
+		console.log(JSONbig.stringify(data));
 
 		setSubmitting(true);
 
-		try {
-			let method = 'POST';
+		let method = 'POST';
 
-			const response = await fetch(url, {
-				method,
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: JSONbig.stringify(data)
-			});
-
-			const json = await response.json();
-
+		fetch(url, {
+			method,
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSONbig.stringify(data)
+		})
+		.then(response => {
 			if (response.ok) {
-				toast.success(`${json}`);
-			} else {
-				toast.error(`${json}`);
-			}
-		} catch (error) {
-			toast.error(`${error}`);
-			console.error('Error:', error);
-		} finally {
-			setSubmitting(false);
-		}
+                return response.text();
+            } else {
+                toast.error(`Response Error: ${response.status}}`);
+            }
+		})
+		.then(json => {
+			toast.success(`${json}`);
+		})
+		.catch(e => {
+			toast.error(`${e}`);
+			console.error('Error:', e);
+		})
+		.finally(() => setSubmitting(false));
 	};
 
 	return (
