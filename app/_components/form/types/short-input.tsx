@@ -4,11 +4,9 @@ import { IntegerInput } from "./integer-input";
 
 export const ShortInput = ({ 
     property,
-    onAddRule,
 } : { 
     property: Property, 
-    onAddRule: (rule: ZodRule) => void,
 }) => {
 
-    return IntegerInput({property: property, onAddRule: onAddRule, min: BigInt(-32768), max: BigInt(32767)});
+    return IntegerInput({property: property, min: BigInt(-32768), max: BigInt(32767)});
 };

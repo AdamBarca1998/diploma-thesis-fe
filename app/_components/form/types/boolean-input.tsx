@@ -1,24 +1,29 @@
 "use client";
 
 import { Property } from "@/types/property";
-import { ErrorMessage } from "@hookform/error-message";
 import { useFormContext } from "react-hook-form";
-import { FieldError } from "../field-error";
 import { ZodRule } from "./func-form";
 import { z } from "zod";
 import { useEffect, useState } from "react";
-import { useZodInput } from "./zod-input";
+import { useZodContext } from "./zod-provider";
 
 export const BooleanInput = ({ 
     property,
-    onAddRule
 } : { 
     property: Property, 
-    onAddRule: (rule: ZodRule) => void
 }) => {
 
     const methods = useFormContext();
-    const { errorMessageProps } = useZodInput(property, onAddRule, z.boolean());
+    const {zodRules, setZodRules} = useZodContext();
+    const [isAddedRule, setIsAddedRule] = useState(false);
+
+    useEffect(() => {
+        if (!isAddedRule) {
+            const rule: ZodRule = { name: property.name, fieldType: z.boolean() };
+            setZodRules(prevRules => [...prevRules, rule]);
+            setIsAddedRule(true);
+        }
+    }, [isAddedRule, property.name, setZodRules, zodRules]);
 
     return (
         <div className="form-control">
@@ -31,8 +36,6 @@ export const BooleanInput = ({
                     {...methods.register(property.name)}
                 />
             </label>
-
-            <ErrorMessage {...errorMessageProps} />
         </div>
     );
 };

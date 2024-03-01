@@ -59,9 +59,10 @@ function ResourceItem(resource: Resource, url: String) {
     return (
         <ul>
             <li key={resource.name + resource.type + "ResourceItem"}>
-                <details>
+                <details open>
                     {Summary(resource.name !== "" ? resource.name : resource.type, resource.icon != "" ? resource.icon : "fa-brands fa-sourcetree", itemUrl)}
 
+                    {resource.properties.map((e) => PropertyItem(e, itemUrl))}
                     {resource.functions.map((e) => FunctionItem(e, itemUrl))}
                 </details>
             </li>
@@ -73,24 +74,40 @@ function FunctionItem(func: Func, url: String) {
 
     const itemUrl = `${url}#${func.name}`;
 
+    const render = (
+        <>
+            {Summary(func.name, "fa-solid fa-code", itemUrl)}
+
+            {func.properties.map((e) => PropertyItem(e))}
+        </>
+    );
+
     return (
         <ul>
             <li key={url + func.name + func.returnType + "AppMenuFunctionItem"}>
-                <details>
-                    {Summary(func.name, "fa-solid fa-code", itemUrl)}
-
-                    {func.properties.map((e) => PropertyItem(e))}
-                </details>
+                {func.properties.length > 0
+                ?
+                    <details>
+                        {render}
+                    </details>
+                :
+                    <>
+                        {render}
+                    </>
+                }
             </li>
         </ul>
     );
 }
 
-function PropertyItem(property: Property) {
+function PropertyItem(property: Property, url: String | undefined = undefined) {
+
+    const itemUrl = `${url}#${property.name}`;
+
     return (
         <ul>
             <li key={property.name + property.type + "PropertyItem"}>
-                {Summary(property.name, "")}
+                {Summary(property.name, "fa-solid fa-cube", url == undefined ? url : itemUrl)}
             </li>
         </ul>
     );

@@ -1,3 +1,4 @@
+import { infoSchema } from "@/types/info";
 import { resourceSchema } from "@/types/resource";
 import { ServerConfig, serverConfigFormSchema, serverStateSchema } from "@/types/server";
 
@@ -35,6 +36,25 @@ export const fetchServerConfigByName = async (name: String) => {
         throw new Error(`Error: ${error}`);
     }
 };
+
+export const fetchInfoByType = async (type: String, url: String) => {
+    const finishUrl = `${url}/${type}/info`;
+
+    try {
+        const response = await fetch(finishUrl, { next: { tags: ['all'] }});
+
+        if (response.ok) {
+            const json = await response.json();
+
+			return infoSchema.parse(json);
+        } else {
+            throw new Error(`Server responded with status ${response.status}`);
+        }
+    } catch (error) {
+        // console.error(`Error fetching data from ${finishUrl}:`, error);
+        return null;
+    }
+}
 
 export async function fetchResources(serverConfig: ServerConfig) {
     const controller = new AbortController();
@@ -85,7 +105,7 @@ export async function fetchResourceByConfigAndType(config: ServerConfig, type: S
 
     return fetch(`${config.url}/${type}`, {
         signal: controller.signal,
-        next: { tags: ['all'] }
+        next: { tags: ['all', `${type}`]}
     })
         .then((response) => {
             clearTimeout(timeoutId);

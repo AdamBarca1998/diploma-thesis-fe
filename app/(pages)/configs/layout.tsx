@@ -33,11 +33,13 @@ export default function RootLayout({
               <Toaster position="bottom-center" />
 
               <div className="flex" style={{ height: `calc(100vh - ${navbarHeight}px)` }}>
+
                 <div className="flex-none overflow-y-auto bg-white bg-opacity-75 w-96">
                   <Suspense fallback={<Loading></Loading>}>
                     <AppMenu></AppMenu>
                   </Suspense>
                 </div>
+
                 <div className="flex-auto overflow-y-auto">
                   <Suspense fallback={<Loading></Loading>}>
                     <div className="m-8">
@@ -45,6 +47,7 @@ export default function RootLayout({
                     </div>
                   </Suspense>
                 </div>
+                
               </div>
             </div>
           </Providers>

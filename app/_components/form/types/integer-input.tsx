@@ -6,30 +6,39 @@ import { useFormContext } from "react-hook-form";
 import { ZodRule } from "./func-form";
 import { z } from "zod";
 import { Input } from "@material-tailwind/react";
-import { useZodInput } from "./zod-input";
+import { useZodContext } from "./zod-provider";
+import { useEffect, useState } from "react";
 
 export const IntegerInput = ({ 
     property,
-    onAddRule,
     min,
     max,
 } : { 
     property: Property, 
-    onAddRule: (rule: ZodRule) => void,
     min: bigint,
     max: bigint,
 }) => {
 
     const methods = useFormContext();
-    const { errorMessageProps } = useZodInput(
-        property,
-        onAddRule, 
-        z.string().min(1, {message: `${property.name} is not optional`}).pipe(
-            z.coerce.bigint()
-                .min(min, {message: `${property.name} must be a number with min value: ${min}`})
-                .max(max, {message: `${property.name} must be a number with max value: ${max}`})
-        )
-    );
+    const {zodRules, setZodRules} = useZodContext();
+    const [isAddedRule, setIsAddedRule] = useState(false);
+
+    useEffect(() => {
+        if (!isAddedRule) {
+            const rule: ZodRule = { 
+                name: property.name, 
+                fieldType: z.string().min(1, {message: `${property.name} is not optional`}).pipe(
+                    z.coerce.bigint()
+                        .min(min, {message: `${property.name} must be a number with min value: ${min}`})
+                        .max(max, {message: `${property.name} must be a number with max value: ${max}`})
+                )
+            };
+
+
+            setZodRules(prevRules => [...prevRules, rule]);
+            setIsAddedRule(true);
+        }
+    }, [isAddedRule, max, min, property.name, setZodRules, zodRules]);
 
     return (
         <div className="form-control">
@@ -40,8 +49,6 @@ export const IntegerInput = ({
                 {...methods.register(property.name)}    
                 crossOrigin={undefined}            
             />
-
-            <ErrorMessage {...errorMessageProps} />
         </div>
     );
 };

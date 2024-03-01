@@ -10,7 +10,7 @@ import JSONbig from 'json-bigint';
 import { useUrlContext } from './url-provider';
 import { useZodContext } from './zod-provider';
 
-export const FuncFormProvider: FC<PropsWithChildren> = ({children}) => {
+export const AttrFormProvider: FC<PropsWithChildren> = ({children}) => {
 
 	const url = useUrlContext();
 	const {zodRules, setZodRules} = useZodContext();
