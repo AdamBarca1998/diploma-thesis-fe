@@ -13,7 +13,7 @@ import { useZodContext } from './zod-provider';
 export const FuncFormProvider: FC<PropsWithChildren> = ({children}) => {
 
 	const url = useUrlContext();
-	const {zodRules, setZodRules} = useZodContext();
+	const {zodRules} = useZodContext();
 	const methods = useForm<any>({
 		resolver: zodResolver(z.object(Object.fromEntries(zodRules.map((rule) => [rule.name, rule.fieldType]))))
 	});
@@ -21,28 +21,24 @@ export const FuncFormProvider: FC<PropsWithChildren> = ({children}) => {
 	const [submitting, setSubmitting] = useState(false);
 
 	const handleSubmit: SubmitHandler<any> = async (data) => {
-		const values = methods.getValues(); // due to select (enum-input)
-		const mergedData = { ...values, ...data };
-		console.log(mergedData);
+		// const values = methods.getValues();
+		// const mergedData = { ...values, ...data }; 
 
 		setSubmitting(true);
 
-		let method = 'POST';
-
 		fetch(url, {
-			method,
+			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			body: JSONbig.stringify(mergedData)
+			body: JSONbig.stringify(data)
 		})
-		.then(response => {
+		.then(async response => {
 			if (response.ok) {
                 return response.text();
             } else {
-                return response.text().then(text => {
-					throw new Error(`Response Error: ${text}`);
-				});
+                const text = await response.text();
+				throw new Error(`Response Error: ${text}`);
             }
 		})
 		.then(text => {

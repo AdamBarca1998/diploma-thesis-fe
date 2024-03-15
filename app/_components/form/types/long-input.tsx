@@ -1,3 +1,5 @@
+"use client";
+
 import { Property } from "@/types/property";
 import { ZodRule } from "./func-form";
 import { IntegerInput } from "./integer-input";

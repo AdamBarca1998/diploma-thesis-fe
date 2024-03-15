@@ -35,7 +35,7 @@ export const StringInput = ({
     return (
         <div className="form-control">
             <div>
-                <Input crossOrigin={undefined} color="green" label={property.name} {...methods.register(property.name)} value={value} onChange={onChange}/>
+                <Input crossOrigin={undefined} color="green" label={property.name} {...methods.register(property.name)} value={value ?? ""} onChange={onChange}/>
             </div>
         </div>
     );

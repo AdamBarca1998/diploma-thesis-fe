@@ -36,7 +36,7 @@ const MovieServerConfigPage = async ({
             <div className="flex flex-row w-full space-x-8">
                 {resource?.properties.map((property) => (
                     <div className="flex flex-col w-full" key={property.name + property.type + 'PropertyItem'}>
-                        <AttributeItem property={property} url={`${config.url}`}/>
+                        <AttributeItem property={property} url={`${config.url}/${resource.type}`}/>
                     </div>
                 ))}
             </div>
@@ -75,8 +75,6 @@ function FunctionItem({ func, url }: { func: Func, url: string }) {
 }
 
 function AttributeItem({ property, url }: {property: Property, url: string}) {
-    
-    const isDisabble = property.validations.includes(Validations.Disable);
 
     return (
         <div className="mt-8 mockup-window border bg-base-300" id={`${property.name}`}>
@@ -86,7 +84,7 @@ function AttributeItem({ property, url }: {property: Property, url: string}) {
                     
                     <UrlProvider url={url}>
                         <ZodProvider>
-                            <AttrFormProvider>
+                            <AttrFormProvider property={property}>
                                 <InputComponent key={property.name} property={property} />
                             </AttrFormProvider>
                         </ZodProvider>

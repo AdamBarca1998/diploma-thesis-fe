@@ -16,7 +16,6 @@ export const Refresher = ({
   
   useEffect(() => {
     const intervalId = setInterval(() => {
-        console.log("REFRESH");
         revalidateCacheByResourceType(resourceType);
         router.refresh();
     }, periodTimeMs);
