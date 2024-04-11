@@ -19,6 +19,8 @@ import { StringInput } from "./string-input";
 import { OptionalInput } from "./optional-input";
 import { UnknownInput } from "./unknown-input";
 import Loading from "@/app/(pages)/configs/loading";
+import { PieChart } from "./pie-chart-input";
+import { LineChart } from "./line-chart-input";
 
 interface InputComponentMap {
     [key: string]: FC<{ 
@@ -46,7 +48,9 @@ export const inputComponentMap: InputComponentMap = {
     "java.lang.Character": CharInput,
 
     "java.lang.String": StringInput,
-    "java.util.Optional": OptionalInput
+    "java.util.Optional": OptionalInput,
+    "sk.adambarca.calculatorserver.resources.charts.PieChart": PieChart,
+    "sk.adambarca.calculatorserver.resources.charts.LineChart": LineChart
 };
 
 

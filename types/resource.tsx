@@ -11,7 +11,6 @@ export const resourceSchema = z.object({
 
 	properties: propertySchema.array(),
 	functions: functionSchema.array(),
-	validations: z.string().array()
 });;
 
 export type Resource = z.infer<typeof resourceSchema>;

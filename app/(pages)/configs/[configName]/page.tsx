@@ -37,7 +37,7 @@ async function ResourceItem({ resource, itemUrl }: { resource: Resource, itemUrl
             <div className="card w-64 bg-base-100 shadow-xl mt-8">
                 <div className="card-body">
                     <h2 className="card-title">
-                        <i className={`${resource.icon != "" ? resource.icon : "fa-brands fa-sourcetree"}`}></i>
+                        <i className={`${resource.icon}`}></i>
                         <p className="over-ellipsis">{resource.name}</p>
                     </h2>
                     

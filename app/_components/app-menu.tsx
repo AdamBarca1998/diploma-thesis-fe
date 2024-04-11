@@ -60,7 +60,7 @@ function ResourceItem(resource: Resource, url: String) {
         <ul>
             <li key={resource.name + resource.type + "ResourceItem"}>
                 <details open>
-                    {Summary(resource.name !== "" ? resource.name : resource.type, resource.icon != "" ? resource.icon : "fa-brands fa-sourcetree", itemUrl)}
+                    {Summary(resource.name !== "" ? resource.name : resource.type, resource.icon, itemUrl)}
 
                     {resource.properties.map((e) => PropertyItem(e, itemUrl))}
                     {resource.functions.map((e) => FunctionItem(e, itemUrl))}

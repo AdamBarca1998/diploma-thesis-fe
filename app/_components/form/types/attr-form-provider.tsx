@@ -57,7 +57,6 @@ export const AttrFormProvider: FC<PropsWithChildren<AttrFormProviderProps>> = ({
 		})
 		.then(text => {
 			toast.success(`${text}`);
-			revalidateCacheByResourceType(resourceType);
 			router.refresh();
 		})
 		.catch(e => {

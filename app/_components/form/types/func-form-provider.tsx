@@ -9,10 +9,12 @@ import toast from 'react-hot-toast';
 import JSONbig from 'json-bigint';
 import { useUrlContext } from './url-provider';
 import { useZodContext } from './zod-provider';
+import { useRouter } from 'next/navigation';
 
 export const FuncFormProvider: FC<PropsWithChildren> = ({children}) => {
 
 	const url = useUrlContext();
+	const router = useRouter();
 	const {zodRules} = useZodContext();
 	const methods = useForm<any>({
 		resolver: zodResolver(z.object(Object.fromEntries(zodRules.map((rule) => [rule.name, rule.fieldType]))))
@@ -43,6 +45,7 @@ export const FuncFormProvider: FC<PropsWithChildren> = ({children}) => {
 		})
 		.then(text => {
 			toast.success(`${text}`);
+			router.refresh();
 		})
 		.catch(e => {
 			toast.error(`${e}`);

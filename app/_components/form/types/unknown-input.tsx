@@ -4,8 +4,6 @@ import { useUrlContext } from "./url-provider";
 import { fetchInfoByType } from "@/api-utils/servers";
 import { NotFoundInput } from "./not-found-input";
 import { EnumInput } from "./enum-input";
-import { PrefixPathnameNormalizer } from "next/dist/server/future/normalizers/request/prefix";
-import { PieChart } from "./pie-chart-input";
 
 export const UnknownInput = async ({ 
     property,
@@ -32,10 +30,6 @@ export const UnknownInput = async ({
     } else {
         if (propertyInfo.enums.length > 0) {
             return <EnumInput property={property} values={propertyInfo.enums} />;
-        }
-
-        if (propertyInfo.type == "sk.adambarca.calculatorserver.resources.charts.PieChart") {
-            return <PieChart property={property}></PieChart>;
         }
 
         return (

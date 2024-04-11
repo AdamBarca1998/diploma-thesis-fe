@@ -12,7 +12,22 @@ import { Validations } from "@/types/validation-consts";
 
 const PERIOD_TIME_MS_DEFAULT = 600000; // 10min
 
-const MovieServerConfigPage = async ({ 
+export async function generateMetadata({
+    params
+}: {
+    params: { configName: string, resourceType: string }
+}) {
+    const name = decodeURIComponent(params.configName.replace(/\+/g, ' '));
+    const config = await fetchServerConfigByName(name);
+    const resource = await fetchResourceByConfigAndType(config, params.resourceType);
+  
+    return {
+      title: resource?.name,
+      description: resource?.description
+    }
+}
+
+const ResourcePage = async ({ 
     params 
 } : { 
     params: { configName: string, resourceType: string } 
@@ -27,7 +42,7 @@ const MovieServerConfigPage = async ({
             <Refresher resourceType={params.resourceType} periodTimeMs={resource?.periodTimeMs || PERIOD_TIME_MS_DEFAULT}></Refresher>
 
             <div className="flex space-x-4 text-4xl">
-                <i className={`${resource?.icon != "" ? resource?.icon : "fa-brands fa-sourcetree"}`}></i>
+                <i className={`${resource?.icon}`}></i>
                 <h1 className="font-bold over-ellipsis">{resource?.name}</h1>
             </div>
 
@@ -95,4 +110,4 @@ function AttributeItem({ property, url }: {property: Property, url: string}) {
     );
 }
 
-export default MovieServerConfigPage;
+export default ResourcePage;

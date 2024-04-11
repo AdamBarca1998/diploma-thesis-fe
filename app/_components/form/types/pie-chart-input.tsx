@@ -2,7 +2,7 @@
 
 import { Property } from "@/types/property";
 import { ArcElement, Chart, Legend, Tooltip } from "chart.js";
-import { Doughnut, Pie } from "react-chartjs-2";
+import { Pie } from "react-chartjs-2";
 
 export const PieChart = ({ 
     property,

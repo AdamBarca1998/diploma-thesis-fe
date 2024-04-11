@@ -105,7 +105,7 @@ export async function fetchResourceByConfigAndType(config: ServerConfig, type: S
 
     return fetch(`${config.url}/${type}`, {
         signal: controller.signal,
-        next: { tags: ['all', `${type}`]}
+        cache: 'no-store'
     })
         .then((response) => {
             clearTimeout(timeoutId);
