@@ -6,6 +6,7 @@ import { FC, PropsWithChildren, useState } from "react";
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from "@material-tailwind/react";
 import { useRouter } from "next/navigation";
+import { revalidateCaches } from "@/api-utils/cache";
 
 export const ServerConfigsFormProvider: FC<PropsWithChildren<{onClose: () => void}>> = ({
 	children,
@@ -35,6 +36,7 @@ export const ServerConfigsFormProvider: FC<PropsWithChildren<{onClose: () => voi
 
 			if (response.ok) {
 				onClose();
+				revalidateCaches();
 				router.refresh();
 			} else {
 				console.error('Failed to create new server!');

@@ -3,7 +3,6 @@
 import { FormProvider, type SubmitHandler, useForm } from 'react-hook-form';
 import { FC, PropsWithChildren, useState } from "react";
 import { zodResolver } from '@hookform/resolvers/zod';
-import { ZodRule } from "./func-form";
 import { z } from 'zod';
 import toast from 'react-hot-toast';
 import JSONbig from 'json-bigint';
@@ -11,7 +10,6 @@ import { useUrlContext } from './url-provider';
 import { useZodContext } from './zod-provider';
 import { Property } from '@/types/property';
 import { Validations } from '@/types/validation-consts';
-import { revalidateCacheByResourceType } from '@/api-utils/cache';
 import { useRouter } from "next/navigation";
 
 interface AttrFormProviderProps {

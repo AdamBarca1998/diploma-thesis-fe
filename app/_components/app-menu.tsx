@@ -3,8 +3,9 @@ import { ServerConfig, serverStateSchema } from "@/types/server";
 import { Resource } from "@/types/resource";
 import { Func } from "@/types/function";
 import { Property } from "@/types/property";
-import { fetchResources, fetchServerConfigs } from "@/api-utils/servers";
+import { fetchResources } from "@/api-utils/server-managment-api";
 import Link from "next/link";
+import { fetchServerConfigs } from "@/api-utils/server-config-api";
  
 export async function AppMenu() {
 

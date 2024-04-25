@@ -1,4 +1,5 @@
-import { fetchResourceByConfigAndType, fetchServerConfigByName } from "@/api-utils/servers";
+import { fetchServerConfigByName } from "@/api-utils/server-config-api";
+import { fetchResourceByConfigAndType } from "@/api-utils/server-managment-api";
 import { AttrFormProvider } from "@/app/_components/form/types/attr-form-provider";
 import { FuncForm } from "@/app/_components/form/types/func-form";
 import { FuncFormProvider } from "@/app/_components/form/types/func-form-provider";
@@ -39,7 +40,7 @@ const ResourcePage = async ({
 
     return (
         <>
-            <Refresher resourceType={params.resourceType} periodTimeMs={resource?.periodTimeMs || PERIOD_TIME_MS_DEFAULT}></Refresher>
+            <Refresher periodTimeMs={resource?.periodTimeMs || PERIOD_TIME_MS_DEFAULT}></Refresher>
 
             <div className="flex space-x-4 text-4xl">
                 <i className={`${resource?.icon}`}></i>

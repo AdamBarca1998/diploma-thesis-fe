@@ -1,14 +1,11 @@
 "use client";
 
-import { revalidateCacheByResourceType } from "@/api-utils/cache";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 export const Refresher = ({ 
-    resourceType,
     periodTimeMs
 } : { 
-    resourceType: string,
     periodTimeMs: number
 }) => {
 
@@ -16,14 +13,13 @@ export const Refresher = ({
   
   useEffect(() => {
     const intervalId = setInterval(() => {
-        revalidateCacheByResourceType(resourceType);
         router.refresh();
     }, periodTimeMs);
   
     return () => {
         clearInterval(intervalId);
     };
-  }, [periodTimeMs, resourceType, router]);
+  }, [periodTimeMs, router]);
 
   return null;
 }

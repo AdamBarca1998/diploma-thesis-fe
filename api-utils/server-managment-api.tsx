@@ -1,41 +1,9 @@
 import { infoSchema } from "@/types/info";
 import { resourceSchema } from "@/types/resource";
 import { ServerConfig, serverConfigFormSchema, serverStateSchema } from "@/types/server";
+import { fetchServerConfigByName } from "./server-config-api";
 
 const TIMEOUT_DURATION = 10000;
-
-export const fetchServerConfigs = async () => {
-    try {
-        const response = await fetch("http://localhost:3000/api/server-configs", { next: { tags: ['all'] } });
-
-        if (response.ok) {
-            const json = await response.json();
-
-			return serverConfigFormSchema.array().parse(json);
-        }
-    } catch (error) {
-        console.error(`Error fetching configs:`, error);
-    }
-
-    return [];
-};
-
-export const fetchServerConfigByName = async (name: String) => {
-    try {
-        const response = await fetch(`http://localhost:3000/api/server-configs/${name}`, { next: { tags: ['all'] } });
-
-        if (response.ok) {
-            const json = await response.json();
-
-			return serverConfigFormSchema.parse(json);
-        } else {
-            throw new Error(`Server responded with status ${response.status}`);
-        }
-    } catch (error) {
-        console.error(`Error fetching data from AppServers:`, error);
-        throw new Error(`Error: ${error}`);
-    }
-};
 
 export const fetchInfoByType = async (type: String, url: String) => {
     const finishUrl = `${url}/${type}/info`;
@@ -91,20 +59,13 @@ export async function fetchResources(serverConfig: ServerConfig) {
         });
 }
 
-export async function fetchResourcesByConfigName(configName: String) {
-    const config = await fetchServerConfigByName(configName);
-
-    if (config) {
-        return fetchResources(config);
-    }
-}
-
 export async function fetchResourceByConfigAndType(config: ServerConfig, type: String) {
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), TIMEOUT_DURATION);
 
     return fetch(`${config.url}/${type}`, {
         signal: controller.signal,
+        next: { tags: ['all'] },
         cache: 'no-store'
     })
         .then((response) => {
@@ -123,4 +84,12 @@ export async function fetchResourceByConfigAndType(config: ServerConfig, type: S
             // console.error(`Error fetching resources ${serverConfig.name} ${serverConfig.url}:`, error);
             // throw new Error(`Error: ${error}`);
         });
+}
+
+export async function fetchResourcesByConfigName(configName: String) {
+    const config = await fetchServerConfigByName(configName);
+
+    if (config) {
+        return fetchResources(config);
+    }
 }

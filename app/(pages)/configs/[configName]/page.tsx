@@ -1,4 +1,4 @@
-import { fetchResourcesByConfigName } from "@/api-utils/servers";
+import { fetchResourcesByConfigName } from "@/api-utils/server-managment-api";
 import { Resource } from "@/types/resource";
 import Link from "next/link";
 

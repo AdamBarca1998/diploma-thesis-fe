@@ -12,7 +12,7 @@ export const ServerUrlField = () => {
 
 	return (
         <>
-            <Input label="Url" size="lg" crossOrigin={undefined} {...methods.register('url')}/>
+            <Input label="URL" size="lg" crossOrigin={undefined} {...methods.register('url')}/>
 
             <ErrorMessage
                 errors={methods.formState.errors}

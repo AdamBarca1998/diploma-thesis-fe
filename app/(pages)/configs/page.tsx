@@ -1,10 +1,11 @@
-import { fetchResources, fetchServerConfigs } from "@/api-utils/servers";
+import { fetchServerConfigs } from "@/api-utils/server-config-api";
+import { fetchResources } from "@/api-utils/server-managment-api";
 import { ServerDialog } from "@/app/_components/server-dialog";
 import { ServerConfig } from "@/types/server";
 import Link from "next/link";
 import { Suspense } from "react";
 
-export default async function Home() {
+export default async function HomePage() {
 
   const configs = await fetchServerConfigs();
 
