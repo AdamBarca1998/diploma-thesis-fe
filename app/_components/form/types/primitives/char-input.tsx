@@ -1,20 +1,20 @@
 "use client";
 
 import { Property } from "@/types/property";
-import { ZodRule } from "./func-form";
 import { ErrorMessage } from "@hookform/error-message";
 import { useFormContext } from "react-hook-form";
 import { z } from "zod";
+import { ZodRule } from "../func-form";
 import { Input } from "@material-tailwind/react";
-import { useZodContext } from "./zod-provider";
 import { useEffect, useState } from "react";
+import { useZodContext } from "../providers/zod-provider";
 
-export const FloatInput = ({ 
+const MIN_MAX = 1;
+
+export const CharInput = ({ 
     property,
-    isOptional,
 } : { 
     property: Property, 
-    isOptional: boolean
 }) => {
 
     const methods = useFormContext();
@@ -25,25 +25,22 @@ export const FloatInput = ({
         if (!isAddedRule) {
             const rule: ZodRule = { 
                 name: property.name, 
-                fieldType: isOptional 
-                    ? z.coerce.number()
-                    : z.string().min(1, {message: `${property.name} is not optional`}).pipe(z.coerce.number())
+                fieldType: z.string().min(MIN_MAX, {message: `${property.name} is not optional`}).max(MIN_MAX) 
             };
             setZodRules(prevRules => [...prevRules, rule]);
             setIsAddedRule(true);
         }
-    }, [isAddedRule, isOptional, property.name, setZodRules, zodRules]);
+    }, [isAddedRule, property.name, setZodRules, zodRules]);
 
     return (
-        <div className="form-control">
+        <>
             <Input
-                label={`${property.name}${isOptional ? "?" : ""}`}
+                label={`${property.name}`}
                 color="white"
-                type="number"
-                step={0.001}
+                maxLength={MIN_MAX}
                 {...methods.register(property.name)}    
                 crossOrigin={undefined}            
             />
-        </div>
+        </>
     );
 };

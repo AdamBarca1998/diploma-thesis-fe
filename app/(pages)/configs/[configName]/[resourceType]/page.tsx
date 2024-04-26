@@ -1,11 +1,11 @@
 import { fetchServerConfigByName } from "@/api-utils/server-config-api";
 import { fetchResourceByConfigAndType } from "@/api-utils/server-managment-api";
-import { AttrFormProvider } from "@/app/_components/form/types/attr-form-provider";
+import { AttrFormProvider } from "@/app/_components/form/types/providers/attr-form-provider";
 import { FuncForm } from "@/app/_components/form/types/func-form";
-import { FuncFormProvider } from "@/app/_components/form/types/func-form-provider";
+import { FuncFormProvider } from "@/app/_components/form/types/providers/func-form-provider";
 import { InputComponent } from "@/app/_components/form/types/input-component";
-import { UrlProvider } from "@/app/_components/form/types/url-provider";
-import { ZodProvider } from "@/app/_components/form/types/zod-provider";
+import { UrlProvider } from "@/app/_components/form/types/providers/url-provider";
+import { ZodProvider } from "@/app/_components/form/types/providers/zod-provider";
 import { Refresher } from "@/app/_components/refresher";
 import { Func } from "@/types/function";
 import { Property } from "@/types/property";

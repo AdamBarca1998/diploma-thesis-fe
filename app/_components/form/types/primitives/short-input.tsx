@@ -1,14 +1,14 @@
 "use client";
 
 import { Property } from "@/types/property";
-import { ZodRule } from "./func-form";
+import { ZodRule } from "../func-form";
 import { IntegerInput } from "./integer-input";
 
-export const ByteInput = ({ 
+export const ShortInput = ({ 
     property,
 } : { 
     property: Property, 
 }) => {
 
-    return IntegerInput({property: property, min: BigInt(-128), max: BigInt(127)});
+    return IntegerInput({property: property, min: BigInt(-32768), max: BigInt(32767)});
 };

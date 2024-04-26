@@ -3,7 +3,7 @@
 import { FormProvider, type SubmitHandler, useForm } from 'react-hook-form';
 import { FC, PropsWithChildren, useState } from "react";
 import { zodResolver } from '@hookform/resolvers/zod';
-import { ZodRule } from "./func-form";
+import { ZodRule } from "../func-form";
 import { z } from 'zod';
 import toast from 'react-hot-toast';
 import JSONbig from 'json-bigint';

@@ -3,10 +3,10 @@
 import { Property } from "@/types/property";
 import { ErrorMessage } from "@hookform/error-message";
 import { useFormContext } from "react-hook-form";
-import { ZodRule } from "./func-form";
+import { ZodRule } from "../func-form";
 import { z } from "zod";
 import { Input } from "@material-tailwind/react";
-import { useZodContext } from "./zod-provider";
+import { useZodContext } from "../providers/zod-provider";
 import { useEffect, useState } from "react";
 
 export const IntegerInput = ({ 

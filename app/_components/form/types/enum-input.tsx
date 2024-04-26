@@ -5,7 +5,7 @@ import { Select, Option } from "@material-tailwind/react";
 import { useState, useEffect } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 import { z } from "zod";
-import { useZodContext, ZodRule } from "./zod-provider";
+import { useZodContext, ZodRule } from "./providers/zod-provider";
 
 export const EnumInput = ({ 
     property,

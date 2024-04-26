@@ -1,26 +1,24 @@
 "use client";
 
 import { Property } from "@/types/property";
-import { useState, useEffect, FC, Suspense } from "react";
+import { FC, Suspense } from "react";
 import { useFormContext } from "react-hook-form";
-import { ZodSchema } from "zod";
-import { ZodRule } from "./func-form";
 import { FieldError } from "../field-error";
-import { BooleanInput } from "./boolean-input";
+import { BooleanInput } from "./primitives/boolean-input";
 import { ErrorMessage } from "@hookform/error-message";
-import { NotFoundInput } from "./not-found-input";
-import { ByteInput } from "./byte-input";
-import { ShortInput } from "./short-input";
-import { IntInput } from "./int-input";
-import { LongInput } from "./long-input";
-import { FloatInput } from "./float-input";
-import { CharInput } from "./char-input";
+import { ByteInput } from "./primitives/byte-input";
+import { ShortInput } from "./primitives/short-input";
+import { IntInput } from "./primitives/int-input";
+import { LongInput } from "./primitives/long-input";
+import { FloatInput } from "./primitives/float-input";
+import { CharInput } from "./primitives/char-input";
 import { StringInput } from "./string-input";
 import { OptionalInput } from "./optional-input";
 import { UnknownInput } from "./unknown-input";
 import Loading from "@/app/(pages)/configs/loading";
-import { PieChart } from "./pie-chart-input";
-import { LineChart } from "./line-chart-input";
+import { PieChart } from "./charts/pie-chart-input";
+import { LineChart } from "./charts/line-chart-input";
+import { DoughnutChart } from "./charts/doughnut-chart-input";
 
 interface InputComponentMap {
     [key: string]: FC<{ 
@@ -49,8 +47,9 @@ export const inputComponentMap: InputComponentMap = {
 
     "java.lang.String": StringInput,
     "java.util.Optional": OptionalInput,
-    "sk.adambarca.calculatorserver.resources.charts.PieChart": PieChart,
-    "sk.adambarca.calculatorserver.resources.charts.LineChart": LineChart
+    "sk.adambarca.calculatorserver.resources.charts.structure.PieChart": PieChart,
+    "sk.adambarca.calculatorserver.resources.charts.structure.LineChart": LineChart,
+    "sk.adambarca.calculatorserver.resources.charts.structure.DoughnutChart": DoughnutChart
 };
 
 

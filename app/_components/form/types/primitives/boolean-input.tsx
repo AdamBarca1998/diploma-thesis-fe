@@ -2,10 +2,10 @@
 
 import { Property } from "@/types/property";
 import { useFormContext } from "react-hook-form";
-import { ZodRule } from "./func-form";
+import { ZodRule } from "../func-form";
 import { z } from "zod";
 import { useEffect, useState } from "react";
-import { useZodContext } from "./zod-provider";
+import { useZodContext } from "../providers/zod-provider";
 
 export const BooleanInput = ({ 
     property,

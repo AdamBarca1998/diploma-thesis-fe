@@ -1,7 +1,7 @@
 "use client";
 
 import { Func } from "@/types/function";
-import { FuncFormProvider } from "./func-form-provider";
+import { FuncFormProvider } from "./providers/func-form-provider";
 import { ZodSchema } from "zod";
 import { InputComponent } from "./input-component";
 

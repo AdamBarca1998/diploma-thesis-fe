@@ -1,6 +1,6 @@
 import { Property } from "@/types/property";
 import { ZodRule } from "./func-form";
-import { useUrlContext } from "./url-provider";
+import { useUrlContext } from "./providers/url-provider";
 import { fetchInfoByType } from "@/api-utils/server-managment-api";
 import { NotFoundInput } from "./not-found-input";
 import { EnumInput } from "./enum-input";
