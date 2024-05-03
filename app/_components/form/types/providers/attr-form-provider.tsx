@@ -27,7 +27,7 @@ export const AttrFormProvider: FC<PropsWithChildren<AttrFormProviderProps>> = ({
 	
 	const [submitting, setSubmitting] = useState(false);
 
-	const isDisabble = property.validations.includes(Validations.Disable);
+	const isDisabled = property.validations.includes(Validations.Disabled);
 
 	const handleSubmit: SubmitHandler<any> = async (data) => {
 		// const values = methods.getValues();
@@ -70,7 +70,7 @@ export const AttrFormProvider: FC<PropsWithChildren<AttrFormProviderProps>> = ({
 				<div className="flex flex-col gap-6">
 					{children} 
 
-					{isDisabble ?
+					{isDisabled ?
 						null
 					:
 						submitting ?

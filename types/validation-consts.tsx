@@ -1,3 +1,3 @@
 export enum Validations {
-    Disable = "Disable",
+    Disabled = "Disabled",
 }
