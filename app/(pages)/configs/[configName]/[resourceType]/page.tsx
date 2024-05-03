@@ -49,9 +49,9 @@ const ResourcePage = async ({
 
             <p className="text-neutral-500 over-ellipsis">{resource?.description}</p>
 
-            <div className="flex flex-row w-full space-x-8">
+            <div className="flex flex-wrap">
                 {resource?.properties.map((property) => (
-                    <div className="flex flex-col w-full" key={property.name + property.type + 'PropertyItem'}>
+                    <div className="flex flex-col w-auto mr-8" key={property.name + property.type + 'PropertyItem'}>
                         <AttributeItem property={property} url={`${config.url}/${resource.type}`}/>
                     </div>
                 ))}

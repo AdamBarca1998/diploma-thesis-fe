@@ -27,15 +27,17 @@ export const BooleanInput = ({
 
     return (
         <div className="form-control">
-            <label className="label cursor-pointer pl-0">
-                <span className="font-bold">{property.name}</span> 
-                <input 
-                    type="checkbox" 
-                    className="toggle" 
-                    checked={methods.watch(property.name) || false} 
-                    {...methods.register(property.name)}
-                />
-            </label>
+            <div className="w-72">
+                <label className="label cursor-pointer pl-0">
+                    <span className="font-bold">{property.name}</span>
+                    <input 
+                        type="checkbox" 
+                        className="toggle ml-10" 
+                        checked={methods.watch(property.name) || false} 
+                        {...methods.register(property.name)}
+                    />
+                </label>
+            </div>
         </div>
     );
 };
